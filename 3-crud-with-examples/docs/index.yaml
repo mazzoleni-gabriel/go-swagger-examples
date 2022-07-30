@@ -1,0 +1,77 @@
+basePath: /fake-api/
+consumes:
+- application/json
+definitions:
+  ErrorResponse:
+    properties:
+      error:
+        description: Error identifier
+        example: null_pointer_exception
+        type: string
+        x-go-name: Error
+      message:
+        description: message describing the error
+        example: Exception in thread "main" java.lang.NullPointerException
+        type: string
+        x-go-name: Message
+    type: object
+    x-go-package: 3-crud-with-examples/task/get
+  TaskGetResponse:
+    properties:
+      description:
+        description: Task description
+        example: implement a task API
+        type: string
+        x-go-name: Description
+      id:
+        description: Task unique identifier
+        example: 123
+        format: int64
+        type: integer
+        x-go-name: ID
+      value:
+        description: 'Task status: TODO, WIP or DONE'
+        example: TODO
+        type: string
+        x-go-name: Status
+    type: object
+    x-go-package: 3-crud-with-examples/task/get
+host: localhost:8080
+info:
+  description: Documentation of fake-api.
+  title: fake-api.
+  version: 0.0.0
+paths:
+  /task/{id}:
+    get:
+      description: This is the description, it can be longer than the summary
+      operationId: get-task
+      parameters:
+      - description: Task unique identifier
+        format: int64
+        in: path
+        name: id
+        required: true
+        type: integer
+        x-go-name: ID
+      responses:
+        "200":
+          description: TaskGetResponse
+          schema:
+            $ref: '#/definitions/TaskGetResponse'
+        "404":
+          description: ErrorResponse
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        "500":
+          description: ErrorResponse
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: This is the summary
+      tags:
+      - Task
+produces:
+- application/json
+schemes:
+- https
+swagger: "2.0"
