@@ -1,0 +1,62 @@
+basePath: /fake-api/
+consumes:
+- application/json
+definitions:
+  ErrorResponse:
+    properties:
+      error:
+        type: string
+        x-go-name: Error
+    type: object
+    x-go-package: 3-crud-with-examples/task/upload
+  TaskUploadResponse:
+    properties:
+      message:
+        type: string
+        x-go-name: Message
+      status:
+        format: int64
+        type: integer
+        x-go-name: Status
+    type: object
+    x-go-package: 3-crud-with-examples/task/upload
+host: localhost:8080
+info:
+  description: Documentation of fake-api.
+  title: fake-api.
+  version: 0.0.0
+paths:
+  /task/upload:
+    post:
+      consumes:
+      - multipart/form-data
+      operationId: upload-task
+      parameters:
+      - in: formData
+        name: file
+        type: file
+        x-go-name: File
+      - in: header
+        name: boundary
+        type: string
+        x-go-name: Boundary
+      responses:
+        "201":
+          description: TaskUploadResponse
+          schema:
+            $ref: '#/definitions/TaskUploadResponse'
+        "404":
+          description: ErrorResponse
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        "500":
+          description: ErrorResponse
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+      - Task
+produces:
+- application/json
+schemes:
+- https
+swagger: "2.0"
