@@ -1,0 +1,14 @@
+basePath: /fake-api/
+consumes:
+- application/json
+host: localhost:8080
+info:
+  description: Documentation of fake-api.
+  title: fake-api.
+  version: 0.0.0
+paths: {}
+produces:
+- application/json
+schemes:
+- https
+swagger: "2.0"
